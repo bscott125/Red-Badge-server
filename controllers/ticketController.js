@@ -4,14 +4,15 @@ let validateJWT = require("../middleware/validate-jwt");
 const models = require("../models");
 
 router.post("/create", validateJWT, async (req, res) => {
-  const { title, slip, entry } = req.body.ticket;
+  const { title, slip, entry, userId, movieId } = req.body.ticket;
 
   try {
     await models.TicketModel.create({
       title: title,
       slip: slip,
-      entry: entry,
-      userId: req.user.id,
+			entry: entry,
+      userId: userId,
+			movieId: movieId
     }).then((post) => {
       res.status(201).json({
         post: post,
@@ -50,10 +51,9 @@ router.get("/mine", async (req, res) => {
 
 
 router.put('/update/:id', (req, res) => {
-	models.TicketModel.update(req.body.ticket, {
+	models.TicketModel.update(req.body, {
 			where: {
-					id: req.params.id,
-					userId: req.user.id
+					id: req.params.id
 			}
 	})
 			.then(edit => res.status(200).json(edit))

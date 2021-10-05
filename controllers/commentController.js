@@ -54,10 +54,10 @@ router.post('/create', validateJWT, async (req, res) => {
 	});
 
 	router.put('/update/:id', (req, res) => {
-		models.CommentModel.update(req.body.comment, {
+		models.CommentModel.update(req.body, {
 				where: {
 						id: req.params.id,
-						userId: req.user.id
+						
 				}
 		})
 				.then(edit => res.status(200).json(edit))

@@ -8,7 +8,7 @@ type: DataTypes.STRING,
  },
 
  date: {
- type: DataTypes.INTEGER,
+ type: DataTypes.STRING,
  allowNull: false
  },
 
